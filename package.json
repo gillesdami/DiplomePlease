@@ -1,5 +1,5 @@
 {
-  "name": "DiplomePlease",
+  "name": "diplome-please",
   "version": "1.0.0",
   "description": "Paper please like for fun in the browser",
   "main": "index.js",
@@ -10,9 +10,14 @@
     "ts-loader": "^4.0.1",
     "typescript": "^2.7.2",
     "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.11"
+    "webpack-cli": "^2.0.11",
+    "webpack-dev-server": "^3.1.1"
   },
   "scripts": {
-    "build": "webpack"
+    "build": "webpack --mode production",
+    "serve": "webpack-dev-server -d --inline --hot --colors --host 0.0.0.0 --output-public-path=/dist/ --watch-poll"
+  },
+  "dependencies": {
+    "papaparse": "^4.3.7"
   }
 }

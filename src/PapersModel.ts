@@ -36,7 +36,6 @@ export interface AbsenceRecord {
 export interface AbsencesRecords {
     firstName: string,
     lastName: string,
-    isSign: boolean,
     records: Array<AbsenceRecord>,
 }
 
@@ -82,11 +81,19 @@ export interface ECTSAccount {
     total: number,
 }
 
-export interface PapersModel {
+export interface Papers {
+    paymentCertificat: PaymentCertificat,
     studentCard?: StudentCard,
     absencesRecords?: AbsencesRecords,
-    paymentCertificat: PaymentCertificat,
     projectValidation?: ProjectValidation,
     tripValidation?: TripValidation,
     prospectionValidation?: ProspectionValidation,
+}
+
+export enum OptionalPaper {
+    StudentCard,
+    AbsencesRecords,
+    ProjectValidation,
+    TripValidation,
+    ProspectionValidation,
 }
