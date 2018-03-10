@@ -1,0 +1,16 @@
+{
+  "name": "DiplomePlease",
+  "version": "1.0.0",
+  "description": "Paper please like for fun in the browser",
+  "main": "index.js",
+  "repository": "https://github.com/gillesdami/DiplomePlease.git",
+  "author": "Damien GILLES, Mathilde LECONTE",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.11"
+  },
+  "scripts": {
+    "build": "webpack"
+  }
+}
