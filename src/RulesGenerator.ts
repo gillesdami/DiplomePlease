@@ -4,18 +4,18 @@ import { Papers, OptionalPaper } from './PapersModel'
 const rules: Array<Rule> = [
     {
         text: "Le certificat de paiement indique que l'étudiant a payé 7500€",
-        errorMessage: (papers: Papers) => `L'étudiant n'a payé que ${papers.paymentCertificat.amount}€`,
-        validate: (papers: Papers) => papers.paymentCertificat.amount === 7500,
+        errorMessage: (papers: Papers) => `L'étudiant n'a payé que ${papers.paymentCertificate.amount}€`,
+        validate: (papers: Papers) => papers.paymentCertificate.amount === 7500,
         papersUsed: []
     },
     {
         text: "Le prenom, le nom, la date de naissance et le sexe de la carte etudiant correspondent avec le certificat de paiement",
         errorMessage: (papers: Papers) => "Le prenom, le nom, la date de naissance ou le sexe de la carte etudiant ne correspondent pas avec le certificat de paiement",
         validate: (papers: Papers) => 
-            papers.paymentCertificat.firstName === papers.studentCard.firstName
-            && papers.paymentCertificat.lastName === papers.studentCard.lastName
-            && papers.paymentCertificat.birthDate.getTime() === papers.studentCard.birthDate.getTime()
-            && papers.paymentCertificat.sex === papers.studentCard.sex,
+            papers.paymentCertificate.firstName === papers.studentCard.firstName
+            && papers.paymentCertificate.lastName === papers.studentCard.lastName
+            && papers.paymentCertificate.birthDate.getTime() === papers.studentCard.birthDate.getTime()
+            && papers.paymentCertificate.sex === papers.studentCard.sex,
         papersUsed: [OptionalPaper.StudentCard]
     },
     {

@@ -20,8 +20,8 @@ export enum PaymentMethod {
 }
 
 export enum Sex {
-    M,
-    F
+    M = "M",
+    F = "F"
 }
 
 export interface StudentCard {
@@ -44,7 +44,7 @@ export interface AbsencesRecords {
     records: Array<AbsenceRecord>,
 }
 
-export interface PaymentCertificat {
+export interface PaymentCertificate {
     firstName: string,
     lastName: string,
     birthDate: Date,
@@ -89,7 +89,7 @@ export interface ECTSAccount {
 }
 
 export interface Papers {
-    paymentCertificat: PaymentCertificat,
+    paymentCertificate: PaymentCertificate,
     studentCard?: StudentCard,
     absencesRecords?: AbsencesRecords,
     ectsAccount?: ECTSAccount,

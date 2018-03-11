@@ -39,7 +39,7 @@ export default class PapersGenerator {
 
         return {
             //generate all papers lited in subPapersRequired
-            paymentCertificat: this._generatePaymentCertificat(),
+            paymentCertificate: this._generatePaymentCertificat(),
             studentCard: subPapersRequired.includes(Papers.OptionalPaper.StudentCard) && Math.random() < 0.99 ? this._generateStudentCard() : undefined,
             absencesRecords: subPapersRequired.includes(Papers.OptionalPaper.AbsencesRecords) && Math.random() < 0.99 ? this._generateAbsencesRecords() : undefined,
             projectValidation: subPapersRequired.includes(Papers.OptionalPaper.ProjectValidation) && Math.random() < 0.99 ? this._generateProjectValidation() : undefined,
@@ -49,7 +49,7 @@ export default class PapersGenerator {
         };
     }
 
-    private _generatePaymentCertificat(): Papers.PaymentCertificat {
+    private _generatePaymentCertificat(): Papers.PaymentCertificate {
         return {
             firstName: this._getDataWithNoise("firstName"),
             lastName: this._getDataWithNoise("lastName"),

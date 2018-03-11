@@ -3,6 +3,8 @@ import RulesGenerator from './RulesGenerator';
 import { OptionalPaper, Papers } from './PapersModel';
 import { Validator, Validation } from './Validator';
 import { Rule } from './RulesModel';
+import PapersViewer from './PapersViewer';
+
 import '../style.less';
 
 async function main():Promise<void> {
@@ -12,6 +14,8 @@ async function main():Promise<void> {
     const rulesGenerator: RulesGenerator = new RulesGenerator();
     const rules: Array<Rule> = [rulesGenerator.generateRule([])];
 
+    const papersViewer = new PapersViewer(document.getElementById("papers"));
+
     let subPepersUnused: Array<OptionalPaper> = [OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation, OptionalPaper.ECTSAccount, OptionalPaper.ProjectValidation, OptionalPaper.ProspectionValidation];
     let subPepersUsed: Array<OptionalPaper> = [];
     let errors: number = 0;
@@ -19,6 +23,7 @@ async function main():Promise<void> {
         
         const papers:Papers = papersGenerator.generatePapers(subPepersUsed);
         console.log(papers);
+        papersViewer.showPapers(papers); 
 
         //user action
         const choice:boolean = await new Promise<boolean>((resolve: Function) => {
@@ -26,6 +31,8 @@ async function main():Promise<void> {
                 resolve(bool);
             }
         });
+
+        papersViewer.clear();
 
         //action validation
         const validation: Validation = Validator.validate(papers, rules, subPepersUsed)
@@ -49,7 +56,6 @@ async function main():Promise<void> {
                 rules.push(rule);
                 console.warn("students must follow a new rule: "+ rules[rules.length-1].text);
             }
-            
         }
     }
 

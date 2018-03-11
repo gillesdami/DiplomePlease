@@ -8,10 +8,12 @@
   "license": "MIT",
   "dependencies": {
     "css-loader": "^0.28.10",
+    "draggabilly": "^2.1.1",
     "papaparse": "^4.3.7",
     "style-loader": "^0.20.3"
   },
   "devDependencies": {
+    "@types/react": "^16.0.40",
     "less": "^3.0.1",
     "less-loader": "^4.1.0",
     "ts-loader": "^4.0.1",
