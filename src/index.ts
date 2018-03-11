@@ -3,6 +3,7 @@ import RulesGenerator from './RulesGenerator';
 import { OptionalPaper, Papers } from './PapersModel';
 import { Validator, Validation } from './Validator';
 import { Rule } from './RulesModel';
+import '../style.less';
 
 async function main():Promise<void> {
     const papersGenerator = new PapersGenerator();
