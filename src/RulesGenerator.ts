@@ -14,7 +14,7 @@ const rules: Array<Rule> = [
         validate: (papers: Papers) => 
             papers.paymentCertificat.firstName === papers.studentCard.firstName
             && papers.paymentCertificat.lastName === papers.studentCard.lastName
-            && papers.paymentCertificat.birthDate === papers.studentCard.birthDate
+            && papers.paymentCertificat.birthDate.getTime() === papers.studentCard.birthDate.getTime()
             && papers.paymentCertificat.sex === papers.studentCard.sex,
         papersUsed: [OptionalPaper.StudentCard]
     },
@@ -43,7 +43,7 @@ const rules: Array<Rule> = [
     },
     {
         text: "La date du billet de retour est après la date du billet d'aller",
-        errorMessage: (papers: Papers) => `La date du billet de retour ${papers.tripValidation.startDate.toDateString()} est précède la date du billet d'aller ${papers.tripValidation.endDate.toDateString()}`,
+        errorMessage: (papers: Papers) => `La date du billet de retour ${papers.tripValidation.startDate.toDateString()} précède la date du billet d'aller ${papers.tripValidation.endDate.toDateString()}`,
         validate: (papers: Papers) => 
             papers.tripValidation.startDate < papers.tripValidation.endDate,
         papersUsed: [OptionalPaper.StudentCard, OptionalPaper.TripValidation]
@@ -53,6 +53,22 @@ const rules: Array<Rule> = [
         errorMessage: (papers: Papers) => `La destination est ${papers.tripValidation.remoteDest} est absurde`,
         validate: (papers: Papers) => papers.tripValidation.isValidDest,
         papersUsed: [OptionalPaper.StudentCard, OptionalPaper.TripValidation]
+    },
+    {
+        text: "Le prenom, le nom et la date de naissance de la carte etudiant correspondent avec le relevé d'ECTS",
+        errorMessage: (papers: Papers) => "Le prenom, le nom ou la date de naissance de la carte etudiant ne correspondent pas avec le relevé d'ECTS",
+        validate: (papers: Papers) => 
+            papers.ectsAccount.firstName === papers.studentCard.firstName
+            && papers.ectsAccount.lastName === papers.studentCard.lastName
+            && papers.ectsAccount.birthDate.getTime() === papers.studentCard.birthDate.getTime(),
+        papersUsed: [OptionalPaper.StudentCard, OptionalPaper.ECTSAccount]
+    },
+    {
+        text: "Le nombre d'ECTS est supérieur ou égal à 200",
+        errorMessage: (papers: Papers) => `Le nombre d'ECTS est inférieur à 200 (${papers.ectsAccount.total})`,
+        validate: (papers: Papers) => 
+            papers.ectsAccount.total >= 200,
+        papersUsed: [OptionalPaper.StudentCard, OptionalPaper.ECTSAccount]
     },
     {
         text: "Le prenom et le nom de la carte etudiant correspondent avec le rendu du projet",

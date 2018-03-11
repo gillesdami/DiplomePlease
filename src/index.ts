@@ -1,36 +1,39 @@
 import PapersGenerator from './PapersGenerator';
 import RulesGenerator from './RulesGenerator';
-import { OptionalPaper } from './PapersModel';
+import { OptionalPaper, Papers } from './PapersModel';
+import { Validator } from './Validator';
+import { Rule } from './RulesModel';
 
-/*
 const papersGenerator = new PapersGenerator();
 
 papersGenerator.loadCsv("data/students.csv").then(
     () => {
-        console.log(papersGenerator.generatePapers([
+        const rulesGenerator: RulesGenerator = new RulesGenerator();
+        const rules: Array<Rule> = [];
+        const papers: Papers = papersGenerator.generatePapers([
             OptionalPaper.StudentCard,
             OptionalPaper.AbsencesRecords,
             OptionalPaper.ProjectValidation,
             OptionalPaper.TripValidation,
-            OptionalPaper.ProspectionValidation]));
-            console.log(papersGenerator.generatePapers([OptionalPaper.StudentCard]));
-        console.log(papersGenerator);
+            OptionalPaper.ProspectionValidation]);
+            
+        rules.push(rulesGenerator.generateRule([OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation, OptionalPaper.ProjectValidation, OptionalPaper.ProspectionValidation]));
+
+        rules.push(rulesGenerator.generateRule([OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation, OptionalPaper.ProjectValidation, OptionalPaper.ProspectionValidation]));
+
+        rules.push(rulesGenerator.generateRule([OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation, OptionalPaper.ProjectValidation, OptionalPaper.ProspectionValidation]));
+
+        rules.push(rulesGenerator.generateRule([OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation, OptionalPaper.ProjectValidation, OptionalPaper.ProspectionValidation]));
+
+        rules.push(rulesGenerator.generateRule([OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation, OptionalPaper.ProjectValidation, OptionalPaper.ProspectionValidation]));
+
+        rules.push(rulesGenerator.generateRule([OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation, OptionalPaper.ProjectValidation, OptionalPaper.ProspectionValidation]));
+
+        rules.push(rulesGenerator.generateRule([OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation, OptionalPaper.ProjectValidation, OptionalPaper.ProspectionValidation]));
+
+        console.log(rules);
+        console.log(papers);
+
+        console.log(Validator.validate(papers, rules, [OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation, OptionalPaper.ProjectValidation, OptionalPaper.ProspectionValidation]));
     }
 );
-*/
-
-const rulesGenerator = new RulesGenerator();
-
-console.log(rulesGenerator.generateRule([]));
-console.log(rulesGenerator.generateRule([]));
-console.log(rulesGenerator.generateRule([OptionalPaper.StudentCard]));
-console.log(rulesGenerator.generateRule([OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords]));
-console.log(rulesGenerator.generateRule([OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords]));
-console.log(rulesGenerator.generateRule([OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation]));
-console.log(rulesGenerator.generateRule([OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation]));
-console.log(rulesGenerator.generateRule([OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation]));
-console.log(rulesGenerator.generateRule([OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation, OptionalPaper.ProjectValidation]));
-console.log(rulesGenerator.generateRule([OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation, OptionalPaper.ProjectValidation, OptionalPaper.ProspectionValidation]));
-console.log(rulesGenerator.generateRule([OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation, OptionalPaper.ProjectValidation, OptionalPaper.ProspectionValidation]));
-
-console.warn(rulesGenerator);

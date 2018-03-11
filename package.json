@@ -6,6 +6,9 @@
   "repository": "https://github.com/gillesdami/DiplomePlease.git",
   "author": "Damien GILLES, Mathilde LECONTE",
   "license": "MIT",
+  "dependencies": {
+    "papaparse": "^4.3.7"
+  },
   "devDependencies": {
     "ts-loader": "^4.0.1",
     "typescript": "^2.7.2",
@@ -16,8 +19,5 @@
   "scripts": {
     "build": "webpack --mode production",
     "serve": "webpack-dev-server -d --inline --hot --colors --host 0.0.0.0 --output-public-path=/dist/ --watch-poll"
-  },
-  "dependencies": {
-    "papaparse": "^4.3.7"
   }
 }

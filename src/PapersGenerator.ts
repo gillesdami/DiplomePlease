@@ -45,6 +45,7 @@ export default class PapersGenerator {
             projectValidation: subPapersRequired.includes(Papers.OptionalPaper.ProjectValidation) && Math.random() < 0.99 ? this._generateProjectValidation() : undefined,
             tripValidation: subPapersRequired.includes(Papers.OptionalPaper.TripValidation) && Math.random() < 0.99 ? this._generateTripValidation() : undefined,
             prospectionValidation: subPapersRequired.includes(Papers.OptionalPaper.ProspectionValidation) && Math.random() < 0.99 ? this._generateProspectionValidation() : undefined,
+            ectsAccount: subPapersRequired.includes(Papers.OptionalPaper.ECTSAccount) && Math.random() < 0.99 ? this._generateECTSAccount() : undefined,
         };
     }
 
@@ -111,6 +112,20 @@ export default class PapersGenerator {
             firstName: this._getDataWithNoise("firstName"),
             lastName: this._getDataWithNoise("lastName"),
             isSign: this.getData("hasValidatedProspection") === "1",
+        }
+    }
+
+    private _generateECTSAccount(): Papers.ECTSAccount {
+        return {
+            firstName: this._getDataWithNoise("firstName"),
+            lastName: this._getDataWithNoise("lastName"),
+            birthDate: new Date(this._getDataWithNoise("birthDate")),
+            sieste: Number(this.getData("sieste")),
+            soiree: Number(this.getData("soiree")),
+            procrastination: Number(this.getData("procrastination")),
+            prise_en_main_grig: Number(this.getData("prise_en_main_grig")),
+            minimisation_de_l_effort: Number(this.getData("minimisation_de_l_effort")),
+            total: Number(this.getData("total")),
         }
     }
 

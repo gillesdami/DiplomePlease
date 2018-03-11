@@ -77,6 +77,9 @@ export interface ProspectionValidation {
 }
 
 export interface ECTSAccount {
+    firstName: string,
+    lastName: string,
+    birthDate: Date,
     sieste: number,
     soiree: number,
     procrastination: number,
@@ -92,12 +95,14 @@ export interface Papers {
     projectValidation?: ProjectValidation,
     tripValidation?: TripValidation,
     prospectionValidation?: ProspectionValidation,
+    ectsAccount?: ECTSAccount
 }
 
 export enum OptionalPaper {
-    StudentCard,
-    AbsencesRecords,
-    ProjectValidation,
-    TripValidation,
-    ProspectionValidation,
+    StudentCard = "studentCard",
+    AbsencesRecords = "absencesRecords",
+    ProjectValidation = "projectValidation",
+    TripValidation = "tripValidation",
+    ProspectionValidation = "prospectionValidation",
+    ECTSAccount = "ectsAccount"
 }
