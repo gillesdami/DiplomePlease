@@ -48,20 +48,18 @@ export default class PapersGenerator {
         };
     }
 
-    //TODO
     private _generatePaymentCertificat(): Papers.PaymentCertificat {
         return {
-            firstName: "todo",
-            lastName: "todo",
-            birthDate: new Date(),
-            sex: Papers.Sex.F,
+            firstName: this._getDataWithNoise("firstName"),
+            lastName: this._getDataWithNoise("lastName"),
+            birthDate: new Date(this._getDataWithNoise("birthDate")),
+            sex: this._getDataWithNoise("sex") === "M" ? Papers.Sex.M : Papers.Sex.F,
             method: this._getRandomFromEnum(Papers.PaymentMethod),
-            date: new Date(),
-            amount: 0,
+            date: this._randomDate(new Date("september 9 2017"), new Date()),
+            amount: 7500* (this.getData("hasPaid") ? 1: Math.random()),
         }
     }
 
-    //TODO
     private _generateStudentCard(): Papers.StudentCard {
         return {
             firstName: this.getData("firstName"),
@@ -72,60 +70,64 @@ export default class PapersGenerator {
         }
     }
     
-    //TODO
     private _generateAbsenceRecord(): Papers.AbsenceRecord {
         return {
-            date: new Date(),
-            subject: Papers.Subject.GAME_OF_THRONE,
-            professor: Papers.Professor.HDM,
+            date: this._randomDate(new Date("september 9 2017"), new Date()),
+            subject: this._getRandomFromEnum(Papers.Subject),
+            professor: this._getRandomFromEnum(Papers.Professor),
         }
     }
     
-    //TODO
     private _generateAbsencesRecords(): Papers.AbsencesRecords {
         return {
-            firstName: "string",
-            lastName: "string",
-            records: [...Array(20).keys()].map(() => this._generateAbsenceRecord()),
+            firstName: this._getDataWithNoise("firstName"),
+            lastName: this._getDataWithNoise("lastName"),
+            records: [...Array(this.getData("absenceCount")).keys()].map(() => this._generateAbsenceRecord()),
         }
     }
     
-    //TODO
     private _generateProjectValidation(): Papers.ProjectValidation {
         return {
-            firstName: "string",
-            lastName: "string",
-            date: new Date(),
-            professor: Papers.Professor.HDM,
+            firstName: this._getDataWithNoise("firstName"),
+            lastName: this._getDataWithNoise("lastName"),
+            date: this._randomDate(new Date("january 1 2018"), new Date()),
+            professor: this._getRandomFromEnum(Papers.Professor),
         }
     }
     
-    //TODO
     private _generateTripValidation(): Papers.TripValidation {
         return {
-            firstName: "string",
-            lastName: "string",
-            startDate: new Date(),
-            remoteDest: "string",
-            isValidDest: false,
-            endDate: new Date(),
+            firstName: this._getDataWithNoise("firstName"),
+            lastName: this._getDataWithNoise("lastName"),
+            startDate: new Date(this.getData("startDate")),
+            remoteDest: this.getData("remoteDest"),
+            isValidDest: this.getData("isValidDest") === "1",
+            endDate: new Date(this.getData("endDate")),
         }
     }
     
-    //TODO
     private _generateProspectionValidation(): Papers.ProspectionValidation {
         return {
-            firstName: "string",
-            lastName: "string",
-            isSign: false,
+            firstName: this._getDataWithNoise("firstName"),
+            lastName: this._getDataWithNoise("lastName"),
+            isSign: this.getData("hasValidatedProspection") === "1",
         }
     }
 
+    /**
+     * Return a random value within a typescript Enum
+     * @param anEnum Enum
+     */
     private _getRandomFromEnum(anEnum: any): any {
         const keys = Object.keys(anEnum);
         return anEnum[keys[this._getRandomInt(0, keys.length)]];
     }
 
+    /**
+     * Return an integer beetween min included and max excluded
+     * @param min number included
+     * @param max number excluded
+     */
     private _getRandomInt(min: number, max: number): number {
         min = Math.ceil(min);
         max = Math.floor(max);
@@ -133,13 +135,13 @@ export default class PapersGenerator {
     }
 
     /**
-     * return getData(attr) if Math.random() > treshold else 
+     * return getData(attr) if Math.random() < treshold else 
      * return an erroned value from the same column in the csv
      * 
      * @param attr 
      * @param treshold 
      */
-    private _getDataWithNoise(attr: string, treshold: number = 0.98): string {
+    private _getDataWithNoise(attr: string, treshold: number = 0.5): string {
         if(Math.random() < treshold) return this.getData(attr);
 
         let i:number;
@@ -148,5 +150,15 @@ export default class PapersGenerator {
             i++);
 
         return this.getData(attr, i % this.rawData.length);
+    }
+
+    /**
+     * Return a random date beetween two dates
+     * 
+     * @param start Date
+     * @param end Date
+     */
+    private _randomDate(start: Date, end: Date) {
+        return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
     }
 }
