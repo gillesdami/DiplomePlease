@@ -156,7 +156,7 @@ export default class PapersGenerator {
      * @param attr 
      * @param treshold 
      */
-    private _getDataWithNoise(attr: string, treshold: number = 0.99): string {
+    private _getDataWithNoise(attr: string, treshold: number = 0.97): string {
         if(Math.random() < treshold) return this.getData(attr);
 
         let i:number;

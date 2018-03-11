@@ -92,10 +92,10 @@ export interface Papers {
     paymentCertificat: PaymentCertificat,
     studentCard?: StudentCard,
     absencesRecords?: AbsencesRecords,
+    ectsAccount?: ECTSAccount,
     projectValidation?: ProjectValidation,
     tripValidation?: TripValidation,
     prospectionValidation?: ProspectionValidation,
-    ectsAccount?: ECTSAccount
 }
 
 export enum OptionalPaper {
