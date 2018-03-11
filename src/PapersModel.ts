@@ -19,11 +19,16 @@ export enum PaymentMethod {
     SUPPLICATIONS = "Supplications",
 }
 
+export enum Sex {
+    M,
+    F
+}
+
 export interface StudentCard {
     firstName: string,
     lastName: string,
     birthDate: Date,
-    sex: boolean, //0 men, 1 women
+    sex: Sex,
     photo: string,
 }
 
@@ -43,7 +48,7 @@ export interface PaymentCertificat {
     firstName: string,
     lastName: string,
     birthDate: Date,
-    sex: boolean,
+    sex: Sex,
     method: PaymentMethod,
     date: Date,
     amount: Number,
@@ -63,7 +68,6 @@ export interface TripValidation {
     remoteDest: string,
     isValidDest: boolean,
     endDate: Date,
-    homeDest: string,
 }
 
 export interface ProspectionValidation {
