@@ -26,6 +26,9 @@ async function main():Promise<void> {
     let subPepersUsed: Array<OptionalPaper> = [OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation, OptionalPaper.ECTSAccount, OptionalPaper.ProjectValidation, OptionalPaper.ProspectionValidation];
     let subPepersUnused: Array<OptionalPaper> = [];
     let errors: number = 0;
+
+    alert('Si les documents des élèves suivent les régles cliquez sur "diplômer" sinon cliquez sur "7500€"');
+
     for (let turn: number = 0; errors < 3; turn++) {
         
         const papers:Papers = papersGenerator.generatePapers(subPepersUsed);
@@ -56,7 +59,7 @@ async function main():Promise<void> {
         //must present a new peper
         if((turn+6) % 6 === 1 && subPepersUnused.length) {
             subPepersUsed.push(subPepersUnused.shift());
-            console.warn("students must present a "+ subPepersUsed[subPepersUsed.length-1]);
+            alert("Les élèves doivent désormais présenter le document: "+ subPepersUsed[subPepersUsed.length-1]);
         }
 
         //must follow a new rule
@@ -66,6 +69,7 @@ async function main():Promise<void> {
                 rules.push(rule);
                 rulesViewer.clear();
                 rulesViewer.showRules(rules);
+                alert("Nouvelle régle: "+ rule.text);
             }
         }
     }
