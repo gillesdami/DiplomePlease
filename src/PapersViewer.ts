@@ -17,10 +17,10 @@ export default class PapersViewer {
 
     constructor(parent: HTMLElement) {
         this.parent = parent;
+        console.log(Draggabilly);
     }
 
     showPapers(papers: Papers) {
-        console.log("preprint");
         if(papers.paymentCertificate) this._showPaymentCertificate(papers.paymentCertificate);
         if(papers.studentCard) this._showStudentCard(papers.studentCard);
         if(papers.absencesRecords) this._showAbsencesRecords(papers.absencesRecords);
@@ -28,10 +28,13 @@ export default class PapersViewer {
         if(papers.projectValidation) this._showProjectValidation(papers.projectValidation);
         if(papers.tripValidation) this._showTripValidation(papers.tripValidation);
         if(papers.prospectionValidation) this._showProspectionValidation(papers.prospectionValidation);
+
+        Array.from(this.parent.children).forEach(function(item) {
+            new Draggabilly(item);
+        });
     }
 
     private _showPaymentCertificate(paymentCertificate: PaymentCertificate) {
-        console.log("PC");
         this.parent.innerHTML += `
 <div id="PaymentCertificate">
     <p class="name">${paymentCertificate.firstName} ${paymentCertificate.lastName}</p>
