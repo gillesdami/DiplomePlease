@@ -17,7 +17,6 @@ export default class PapersViewer {
 
     constructor(parent: HTMLElement) {
         this.parent = parent;
-        console.log(Draggabilly);
     }
 
     showPapers(papers: Papers) {
@@ -42,7 +41,7 @@ export default class PapersViewer {
     <p class="sex">${paymentCertificate.sex}</p>
     <p class="method">${paymentCertificate.method}</p>
     <p class="date">${this._printDate(paymentCertificate.date)}</p>
-    <p class="amount">${paymentCertificate.firstName} €</p>
+    <p class="amount">${paymentCertificate.amount} €</p>
 </div>`;
     }
 

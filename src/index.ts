@@ -6,6 +6,7 @@ import { Rule } from './RulesModel';
 import PapersViewer from './PapersViewer';
 
 import '../style.less';
+import RulesViewer from './RulesViewer';
 
 async function main():Promise<void> {
     const papersGenerator = new PapersGenerator();
@@ -15,6 +16,8 @@ async function main():Promise<void> {
     const rules: Array<Rule> = [rulesGenerator.generateRule([])];
 
     const papersViewer = new PapersViewer(document.getElementById("papers"));
+    const rulesViewer = new RulesViewer(document.getElementById("rules"));
+    rulesViewer.showRules(rules);
 
     let subPepersUnused: Array<OptionalPaper> = [OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation, OptionalPaper.ECTSAccount, OptionalPaper.ProjectValidation, OptionalPaper.ProspectionValidation];
     let subPepersUsed: Array<OptionalPaper> = [];
@@ -22,14 +25,12 @@ async function main():Promise<void> {
     for (let turn: number = 0; errors < 3; turn++) {
         
         const papers:Papers = papersGenerator.generatePapers(subPepersUsed);
-        console.log(papers);
         papersViewer.showPapers(papers); 
 
         //user action
         const choice:boolean = await new Promise<boolean>((resolve: Function) => {
-            (<any>window).answer = (bool: boolean) => {
-                resolve(bool);
-            }
+            document.getElementById("redoubler").onclick = () => resolve(false);
+            document.getElementById("redoubler").onclick = () => resolve(false);
         });
 
         papersViewer.clear();
@@ -38,9 +39,7 @@ async function main():Promise<void> {
         const validation: Validation = Validator.validate(papers, rules, subPepersUsed)
         if(choice !== validation.isValid) {
             errors++;
-            console.warn(choice ? validation.errorMessage : 'Papers where valid');
-        } else {
-            console.log("Good job !");
+            alert(choice ? "Mr Flintz n'est pas content: "+validation.errorMessage : "Mr Flintz n'est pas content: Les papiers de l'éléve étaient valides");
         }
 
         //must present a new peper
@@ -54,12 +53,13 @@ async function main():Promise<void> {
             const rule = rulesGenerator.generateRule(subPepersUsed);
             if(rule) {
                 rules.push(rule);
-                console.warn("students must follow a new rule: "+ rules[rules.length-1].text);
+                rulesViewer.clear();
+                rulesViewer.showRules(rules);
             }
         }
     }
 
-    console.log("GAME OVER");
+    alert("GAME OVER: Flintz vous a viré !");
 }
 
 main();

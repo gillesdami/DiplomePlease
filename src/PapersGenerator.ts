@@ -57,7 +57,7 @@ export default class PapersGenerator {
             sex: this._getDataWithNoise("sex") === "M" ? Papers.Sex.M : Papers.Sex.F,
             method: this._getRandomFromEnum(Papers.PaymentMethod),
             date: this._randomDate(new Date("september 9 2017"), new Date()),
-            amount: 7500* (this.getData("hasPaid") ? 1: Math.random()),
+            amount: Math.floor(7500* (this.getData("hasPaid") === "1" ? 1: Math.random())),
         }
     }
 
