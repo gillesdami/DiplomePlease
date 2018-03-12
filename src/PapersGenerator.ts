@@ -123,7 +123,7 @@ export default class PapersGenerator {
             sieste: Number(this.getData("sieste")),
             soiree: Number(this.getData("soiree")),
             procrastination: Number(this.getData("procrastination")),
-            prise_en_main_grig: Number(this.getData("prise_en_main_grig")),
+            prise_en_main_grug: Number(this.getData("prise_en_main_grug")),
             minimisation_de_l_effort: Number(this.getData("minimisation_de_l_effort")),
             total: Number(this.getData("total")),
         }

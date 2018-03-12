@@ -15,57 +15,108 @@ body {
             div {
                 background-color: lightgray;
                 display: inline-block;
+                position: absolute;
+
+                p {
+                    position: relative;
+                    line-height: 0;
+                    margin: 0;
+                    pointer-events: none;
+                    font-size: 3vw;
+                    user-select: none;
+                    color: rgb(255, 255, 255);
+                    mix-blend-mode: difference;
+                }
             }
 
             #PaymentCertificate {
-                position: relative;
+                
                 left: 10%;
-                top: 15%;
+                top: 10%;
+                background: #ffffff url("/assets/cards/payement.png") no-repeat right top;
+                background-size:cover;
+
+                width: 63vw;
+                height: 40vw;
+                min-width: 210px;
+                min-height: 133px;
+                max-width: 630px;
+                max-height: 400px;
 
                 .name {
-
+                    top: 50%;
+                    left: 23%;
                 }
                 
                 .birthDate {
-
+                    top: 56%;
+                    left: 64%;
                 }
                 
                 .sex {
-
+                    top: 57%;
+                    left: 26%;
                 }
                 
                 .method {
-
+                    top: 88%;
+                    left: 52%;
                 }
                 
                 .date {
-
+                    top: 9%;
+                    left: 9%;
                 }
                 
                 .amount {
-
+                    top: 80%;
+                    left: 51%;
                 }    
             }
 
             #StudentCard {
-                .name {
 
+                left: 20%;
+                top: 20%;
+                background: #ffffff url("/assets/cards/carteetudiante.png") no-repeat right top;
+                background-size:cover;
+
+                width: 86vw;
+                height: 54vw;
+                min-width: 172px;
+                min-height: 108px;
+                max-width: 860px;
+                max-height: 540px;
+
+                .name {
+                    top: 46%;
+                    left: 8%;
                 }
                 
                 .birthDate {
-
+                    top: 66%;
+                    left: 8%;
                 }
                 
                 .sex {
-
+                    top: 86%;
+                    left: 8%;
                 }
                 
                 .photo {
-
+                    position: absolute;
+                    left: 69%;
+                    top: 4%;
+                    width: 18vw;
+                    height: 24vw;
                 }
             }
             
             #AbsencesRecords {
+
+                left: 30%;
+                top: 30%;
+
                 .name {
 
                 }
@@ -94,74 +145,144 @@ body {
             }
             
             #ECTSAccount {
-                .name {
 
+                left: 40%;
+                top: 40%;
+                background: #ffffff url("/assets/cards/rapport ects.png") no-repeat right top;
+                background-size:cover;
+
+                width: 58.4vw;
+                height: 71vw;
+                min-width: 117px;
+                min-height: 142px;
+                max-width: 584px;
+                max-height: 710px;
+
+                .name {
+                    top: 31%;
+                    left: 14%;
                 }
 
                 .birthDate {
-
+                    top: 34%;
+                    left: 53%;
                 }
 
                 .sieste {
-
+                    top: 52%;
+                    left: 36%;
                 }
 
                 .soiree {
-
+                    top: 57.5%;
+                    left: 34%;
                 }
 
                 .procrastination {
-
+                    top: 67%;
+                    left: 55%;
                 }
 
-                .prise_en_main_grig {
-
+                .prise_en_main_grug {
+                    top: 72%;
+                    left: 72%;
                 }
 
                 .minimisation_de_l_effort {
-
+                    top: 81%;
+                    left: 71%;
                 }
             }
             
             #ProjectValidation {
-                .name {
 
+                left: 50%;
+                top: 50%;
+                background: #ffffff url("/assets/cards/rendu projet.png") no-repeat right top;
+                background-size:cover;
+
+                width: 63vw;
+                height: 30vw;
+                min-width: 126px;
+                min-height: 60px;
+                max-width: 630px;
+                max-height: 300px;
+
+                .name {
+                    top: 43%;
+                    left: 22%;
                 }
 
                 .date {
-
+                    top: 71%;
+                    left: 20%;
                 }
 
                 .professor {
-
+                    top: 80%;
+                    left: 60%;
                 }
             }
             
             #TripValidation {
-                .name {
 
+                left: 60%;
+                top: 60%;
+                background: #ffffff url("/assets/cards/billet train1.png") no-repeat right top;
+                background-size:cover;
+
+                width: 63vw;
+                height: 30vw;
+                min-width: 126px;
+                min-height: 60px;
+                max-width: 630px;
+                max-height: 300px;
+                
+                .name {
+                    top: 38%;
+                    left: 33%;
                 }
 
-                .tartDate {
-
+                .startDate {
+                    top: 56%;
+                    left: 25%;
                 }
 
                 .endDate {
-
+                    left: 25%;
+                    top: 81%;
                 }
 
-                .professor {
-
+                .remoteDest {
+                    top: 26%;
+                    left: 47%;
                 }
             }
             
             #ProspectionValidation {
-                .name {
 
+                left: 70%;
+                top: 70%;
+                background: #ffffff url("/assets/cards/prospectionnosignatures.png") no-repeat right top;
+                background-size:cover;
+
+                width: 63vw;
+                height: 30vw;
+                min-width: 126px;
+                min-height: 60px;
+                max-width: 630px;
+                max-height: 300px;
+
+                .name {
+                    top: 51%;
+                    left: 39%;
                 }
 
                 .sign {
-
+                    width: 20vw;
+                    position: absolute;
+                    bottom: 5%;
+                    left: 60%;
                 }
             }
         }

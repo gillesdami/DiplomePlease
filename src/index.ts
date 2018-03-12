@@ -23,8 +23,8 @@ async function main():Promise<void> {
     const rulesViewer = new RulesViewer(document.getElementById("rules"));
     rulesViewer.showRules(rules);
 
-    let subPepersUnused: Array<OptionalPaper> = [OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation, OptionalPaper.ECTSAccount, OptionalPaper.ProjectValidation, OptionalPaper.ProspectionValidation];
-    let subPepersUsed: Array<OptionalPaper> = [];
+    let subPepersUsed: Array<OptionalPaper> = [OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation, OptionalPaper.ECTSAccount, OptionalPaper.ProjectValidation, OptionalPaper.ProspectionValidation];
+    let subPepersUnused: Array<OptionalPaper> = [];
     let errors: number = 0;
     for (let turn: number = 0; errors < 3; turn++) {
         

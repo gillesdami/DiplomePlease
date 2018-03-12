@@ -89,7 +89,7 @@ export default class PapersViewer {
     <p class="sieste">${ectsAccount.sieste}</p>
     <p class="soiree">${ectsAccount.soiree}</p>
     <p class="procrastination">${ectsAccount.procrastination}</p>
-    <p class="prise_en_main_grig">${ectsAccount.prise_en_main_grig}</p>
+    <p class="prise_en_main_grug">${ectsAccount.prise_en_main_grug}</p>
     <p class="minimisation_de_l_effort">${ectsAccount.minimisation_de_l_effort}</p>
 </div>`;
     }
@@ -109,15 +109,15 @@ export default class PapersViewer {
     <p class="name">${tripValidation.firstName} ${tripValidation.lastName}</p>
     <p class="startDate">${this._printDate(tripValidation.startDate)}</p>
     <p class="endDate">${this._printDate(tripValidation.endDate)}</p>
-    <p class="professor">${tripValidation.remoteDest}</p>
+    <p class="remoteDest">${tripValidation.remoteDest}</p>
 </div>`;
     }
 
     private _showProspectionValidation(prospectionValidation: ProspectionValidation) {
         this.parent.innerHTML += `
-<div id="TripValidation">
+<div id="ProspectionValidation">
     <p class="name">${prospectionValidation.firstName} ${prospectionValidation.lastName}</p>
-    <img class="sign" src="${prospectionValidation.isSign}"/>
+    ${prospectionValidation.isSign? '<img class="sign" src="assets/cards/signature.png"/>': ''}
 </div>`;
     }
 
@@ -126,6 +126,6 @@ export default class PapersViewer {
     }
 
     private _printDate(date: Date): string {
-        return `${date.getDate()} ${date.getMonth()+1} ${date.getFullYear()-2000}`
+        return `${date.getDate()} / ${date.getMonth()+1} / ${date.getFullYear()-2000}`
     }
 }

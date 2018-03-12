@@ -83,7 +83,7 @@ export interface ECTSAccount {
     sieste: number,
     soiree: number,
     procrastination: number,
-    prise_en_main_grig: number,
+    prise_en_main_grug: number,
     minimisation_de_l_effort: number,
     total: number,
 }
