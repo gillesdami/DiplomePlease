@@ -49,7 +49,7 @@ async function main():Promise<void> {
         const validation: Validation = Validator.validate(papers, rules, subPepersUsed)
         if(choice !== validation.isValid) {
             errors++;
-            lifesElement.textContent = errors+"";
+            lifesElement.textContent = (3-errors)+"";
             alert(choice ? "Mr Flintz n'est pas content: "+validation.errorMessage : "Mr Flintz n'est pas content: Les papiers de l'éléve étaient valides");
         }
 

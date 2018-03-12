@@ -51,7 +51,7 @@ export default class PapersViewer {
     <p class="name">${studentCard.firstName} ${studentCard.lastName}</p>
     <p class="birthDate">${this._printDate(studentCard.birthDate)}</p>
     <p class="sex">${studentCard.sex}</p>
-    <img class="photo" src="${studentCard.photo}"/>
+    <div class="photo"><img src="${studentCard.photo ? studentCard.photo : "assets/cards/face.png"}"/></div>
 </div>`;
     }
 
@@ -64,6 +64,7 @@ export default class PapersViewer {
     <p class="date">${this._printDate(absenceRecord.date)}</p>
     <p class="subject">${absenceRecord.subject}</p>
     <p class="professor">${absenceRecord.professor}</p>
+    <p class="hours">1</p>
 </div>`;
         });
         
@@ -73,11 +74,13 @@ export default class PapersViewer {
     private _showAbsencesRecords(absencesRecords: AbsencesRecords) {
         this.parent.innerHTML += `
 <div id="AbsencesRecords">
+    <img id="AbsencesRecordsTop" src="assets/cards/absencehaut.png"/>
     <p class="name">${absencesRecords.firstName} ${absencesRecords.lastName}</p>
     <div class="records">
     ${this._showAbsenceRecordLines(absencesRecords.records)}
     </div>
     <p class="total">${absencesRecords.records.length}</p>
+    <img id="AbsencesRecordsBottom" src="assets/cards/absencebas.png"/>
 </div>`;
     }
 

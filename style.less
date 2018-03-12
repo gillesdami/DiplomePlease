@@ -1,14 +1,51 @@
 body {
     margin: 0;
     background-color: gray;
+    overflow-y:hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 
     #game {
         #desk {
 
         }
 
+        #scores {
+            position: absolute;
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+            line-height: 20px;
+            background-color: white;
+            border: 2px black solid;
+            z-index: 10;
+
+            div {
+
+            }
+        }
+
         #rules {
 
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            background-color: white;
+            border: 2px black solid;
+            text-align: center;
+            max-height: 20%;
+            z-index: 10;
+            overflow-y: scroll;
+
+            div {
+                
+                user-select: none;
+                border: 2px black solid;
+                padding: 5px;
+            }
         }
 
         #papers {
@@ -16,6 +53,10 @@ body {
                 background-color: lightgray;
                 display: inline-block;
                 position: absolute;
+
+                &:hover {
+                    z-index: 10;
+                }
 
                 p {
                     position: relative;
@@ -26,13 +67,22 @@ body {
                     user-select: none;
                     color: rgb(255, 255, 255);
                     mix-blend-mode: difference;
+                    font-weight: bold;
+
+                    @media screen and (min-width: 800px) {
+                        font-size: 20px;
+                    }
+
+                    @media screen and (max-width: 330px) {
+                        font-size: 10px;
+                    }
                 }
             }
 
             #PaymentCertificate {
                 
-                left: 10%;
-                top: 10%;
+                left: 5%;
+                top: 5%;
                 background: #ffffff url("/assets/cards/payement.png") no-repeat right top;
                 background-size:cover;
 
@@ -40,8 +90,8 @@ body {
                 height: 40vw;
                 min-width: 210px;
                 min-height: 133px;
-                max-width: 630px;
-                max-height: 400px;
+                max-width: 472.5;
+                max-height: 300px;
 
                 .name {
                     top: 50%;
@@ -83,10 +133,10 @@ body {
 
                 width: 86vw;
                 height: 54vw;
-                min-width: 172px;
-                min-height: 108px;
-                max-width: 860px;
-                max-height: 540px;
+                min-width: 287px;
+                min-height: 180px;
+                max-width: 430px;
+                max-height: 270px;
 
                 .name {
                     top: 46%;
@@ -109,6 +159,15 @@ body {
                     top: 4%;
                     width: 18vw;
                     height: 24vw;
+                    max-width: 111px;
+                    max-height: 147px;
+                    min-width: 60px;
+                    min-height: 80px;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                    }
                 }
             }
             
@@ -117,30 +176,69 @@ body {
                 left: 30%;
                 top: 30%;
 
-                .name {
+                width: 50vw;
+                min-width: 167px;
+                min-width: 250px;
+                max-width: 500px;
 
+                #AbsencesRecordsTop {
+                    display: block;
+                    width: 100%;
+                }
+
+                #AbsencesRecordsBottom {
+                    display: block;
+                    width: 100%;
+                }
+
+                .name {
+                    position: absolute;
+                    top: 27.5%;
+                    left: 20%;
                 }
                 
                 .records {
 
-                }
+                    position: initial;
+                    width: 100%;
 
-                .AbsenceRecordLine {
-                    .date {
+                    .AbsenceRecordLine {
 
-                    }
+                        position: initial;
+
+                        background: #ffffff url("/assets/cards/absence1.png") no-repeat right top;
+                        background-size:cover;
         
-                    .subject {
+                        width: 100%;
+                        height: 25vw;
+                        min-height: 125px;
 
+                        .date {
+                            top: 20%;
+                            left: 74%;
+                        }
+            
+                        .subject {
+                            top: 47%;
+                            left: 29%;
+                        }
+            
+                        .professor {
+                            top: 38%;
+                            left: 35%;
+                        }
+
+                        .hours {
+                            left: 83%;
+                            top: 59%;
+                        }
                     }
-        
-                    .professor {
-
-                    }    
                 }
 
                 .total {
-
+                    position: absolute;
+                    bottom: 23%;
+                    left: 68%;
                 }
             }
             
@@ -153,10 +251,10 @@ body {
 
                 width: 58.4vw;
                 height: 71vw;
-                min-width: 117px;
-                min-height: 142px;
-                max-width: 584px;
-                max-height: 710px;
+                min-width: 195px;
+                min-height: 237px;
+                max-width: 438px;
+                max-height: 532.5px;
 
                 .name {
                     top: 31%;
@@ -203,8 +301,8 @@ body {
 
                 width: 63vw;
                 height: 30vw;
-                min-width: 126px;
-                min-height: 60px;
+                min-width: 210px;
+                min-height: 100px;
                 max-width: 630px;
                 max-height: 300px;
 
@@ -233,8 +331,8 @@ body {
 
                 width: 63vw;
                 height: 30vw;
-                min-width: 126px;
-                min-height: 60px;
+                min-width: 210px;
+                min-height: 100px;
                 max-width: 630px;
                 max-height: 300px;
                 
@@ -268,8 +366,8 @@ body {
 
                 width: 63vw;
                 height: 30vw;
-                min-width: 126px;
-                min-height: 60px;
+                min-width: 210px;
+                min-height: 100px;
                 max-width: 630px;
                 max-height: 300px;
 
@@ -288,12 +386,35 @@ body {
         }
 
         #actions {
+
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            
+            &:hover {
+                cursor:pointer;
+            }
+
+            div {
+                border-radius: 20px;
+                height: 40px;
+                line-height: 40px;
+                width: 20%;
+                text-align: center;
+                min-width: 75px;
+                z-index: 10;
+            }
+
             #diplomer {
-                
+                background-color: #00c000;
             }
 
             #redoubler {
-
+                background-color: #c00000;
             }
         }
     }
