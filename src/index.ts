@@ -9,6 +9,10 @@ import '../style.less';
 import RulesViewer from './RulesViewer';
 
 async function main():Promise<void> {
+    const diplomesElement = document.getElementById("diplomes");
+    const fricElement = document.getElementById("fric");
+    const lifesElement = document.getElementById("lifes");
+
     const papersGenerator = new PapersGenerator();
     await papersGenerator.loadCsv("data/students.csv");
 
@@ -29,8 +33,14 @@ async function main():Promise<void> {
 
         //user action
         const choice:boolean = await new Promise<boolean>((resolve: Function) => {
-            document.getElementById("redoubler").onclick = () => resolve(false);
-            document.getElementById("redoubler").onclick = () => resolve(false);
+            document.getElementById("diplomer").onclick = () => {
+                resolve(true);
+                diplomesElement.textContent = (Number(diplomesElement.textContent) +1) + "";
+            }
+            document.getElementById("redoubler").onclick = () => {
+                resolve(false);
+                fricElement.textContent = (Number(fricElement.textContent) + 7500) + "";
+            }
         });
 
         papersViewer.clear();
@@ -39,6 +49,7 @@ async function main():Promise<void> {
         const validation: Validation = Validator.validate(papers, rules, subPepersUsed)
         if(choice !== validation.isValid) {
             errors++;
+            lifesElement.textContent = errors+"";
             alert(choice ? "Mr Flintz n'est pas content: "+validation.errorMessage : "Mr Flintz n'est pas content: Les papiers de l'éléve étaient valides");
         }
 
