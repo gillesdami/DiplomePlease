@@ -18,7 +18,7 @@ ${rule.text}
 </div>`;
         });
 
-        this.parent.innerHTML += html;
+        this.parent.innerHTML = html;
     }
 
     clear() {

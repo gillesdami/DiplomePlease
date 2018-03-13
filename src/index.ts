@@ -8,73 +8,111 @@ import PapersViewer from './PapersViewer';
 import '../style.less';
 import RulesViewer from './RulesViewer';
 
-async function main():Promise<void> {
-    const diplomesElement = document.getElementById("diplomes");
-    const fricElement = document.getElementById("fric");
-    const lifesElement = document.getElementById("lifes");
+class Game {
+    diplomesElement: HTMLElement = document.getElementById("diplomes");
+    fricElement: HTMLElement = document.getElementById("fric");
+    lifesElement: HTMLElement = document.getElementById("lifes");
 
-    const papersGenerator = new PapersGenerator();
-    await papersGenerator.loadCsv("data/students.csv");
+    diplomerElement: HTMLElement = document.getElementById("diplomer");
+    redoublerElement: HTMLElement = document.getElementById("redoubler");
 
-    const rulesGenerator: RulesGenerator = new RulesGenerator();
-    const rules: Array<Rule> = [rulesGenerator.generateRule([])];
+    private _papersGenerator: PapersGenerator;
+    private _rulesGenerator: RulesGenerator;
+    private _papersViewer: PapersViewer;
+    private _rulesViewer: RulesViewer;
 
-    const papersViewer = new PapersViewer(document.getElementById("papers"));
-    const rulesViewer = new RulesViewer(document.getElementById("rules"));
-    rulesViewer.showRules(rules);
+    private _rules: Array<Rule>;
+    private _lifes: number = 3;
+    private _turns: number = 0;
 
-    let subPepersUnused: Array<OptionalPaper> = [OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation, OptionalPaper.ECTSAccount, OptionalPaper.ProjectValidation, OptionalPaper.ProspectionValidation];
-    let subPepersUsed: Array<OptionalPaper> = [];
-    let errors: number = 0;
+    private _subPepersUnused: Array<OptionalPaper> = [OptionalPaper.StudentCard, OptionalPaper.AbsencesRecords, OptionalPaper.TripValidation, OptionalPaper.ECTSAccount, OptionalPaper.ProjectValidation, OptionalPaper.ProspectionValidation];
+    private _subPepersUsed: Array<OptionalPaper> = [];
 
-    alert('Si les documents des élèves suivent les régles cliquez sur "diplômer" sinon cliquez sur "7500€"');
+    constructor() {
+        this._papersGenerator = new PapersGenerator();
+        this._rulesGenerator = new RulesGenerator();
 
-    for (let turn: number = 0; errors < 3; turn++) {
-        
-        const papers:Papers = papersGenerator.generatePapers(subPepersUsed);
-        papersViewer.showPapers(papers); 
+        this._papersViewer = new PapersViewer(document.getElementById("papers"));
+        this._rulesViewer = new RulesViewer(document.getElementById("rules"));
 
-        //user action
-        const choice:boolean = await new Promise<boolean>((resolve: Function) => {
-            document.getElementById("diplomer").onclick = () => {
-                resolve(true);
-                diplomesElement.textContent = (Number(diplomesElement.textContent) +1) + "";
+        this._rules = [this._rulesGenerator.generateRule([])];
+    }
+
+    async start() {
+        await this._papersGenerator.loadCsv("data/students.csv");
+        this._rulesViewer.showRules(this._rules);
+
+        this.info('Si les documents des élèves suivent les régles cliquez sur "diplômer" sinon cliquez sur "7500€"');
+
+        while(this._lifes) {
+            const papers:Papers = this._papersGenerator.generatePapers(this._subPepersUsed);
+            this._papersViewer.showPapers(papers);
+
+            const choice:boolean = await this.getUserChoice();
+
+            this._papersViewer.clear();
+
+            this.validateChoice(choice, papers);
+
+            if((this._turns+6) % 6 === 1 && this._subPepersUnused.length) {
+                this.addPaper();
             }
-            document.getElementById("redoubler").onclick = () => {
+
+            if((this._turns+6) % 3 === 1) {
+                this.addRule();
+            }
+
+            this._turns++;
+        }
+
+        this.info("GAME OVER: Flintz vous a viré !");
+    }
+
+    info(msg: string) {
+        alert(msg);
+    }
+
+    getUserChoice(): Promise<boolean> {
+        return new Promise<boolean>((resolve: Function) => {
+
+            this.diplomerElement.onclick = () => {
+                resolve(true);
+                this.diplomesElement.textContent = (Number(this.diplomesElement.textContent) +1) + "";
+            }
+
+            this.redoublerElement.onclick = () => {
                 resolve(false);
-                fricElement.textContent = (Number(fricElement.textContent) + 7500) + "";
+                this.fricElement.textContent = (Number(this.fricElement.textContent) + 7500) + "";
             }
         });
+    }
 
-        papersViewer.clear();
+    validateChoice(choice: boolean, papers: Papers) {
 
-        //action validation
-        const validation: Validation = Validator.validate(papers, rules, subPepersUsed)
+        const validation: Validation = Validator.validate(papers, this._rules, this._subPepersUsed)
         if(choice !== validation.isValid) {
-            errors++;
-            lifesElement.textContent = (3-errors)+"";
-            alert(choice ? "Mr Flintz n'est pas content: "+validation.errorMessage : "Mr Flintz n'est pas content: Les papiers de l'éléve étaient valides");
-        }
+            this._lifes--;
+            this.lifesElement.textContent = this._lifes+"";
 
-        //must present a new peper
-        if((turn+6) % 6 === 1 && subPepersUnused.length) {
-            subPepersUsed.push(subPepersUnused.shift());
-            alert("Les élèves doivent désormais présenter le document: "+ subPepersUsed[subPepersUsed.length-1]);
-        }
-
-        //must follow a new rule
-        if((turn+6) % 3 === 1) {
-            const rule = rulesGenerator.generateRule(subPepersUsed);
-            if(rule) {
-                rules.push(rule);
-                rulesViewer.clear();
-                rulesViewer.showRules(rules);
-                alert("Nouvelle régle: "+ rule.text);
-            }
+            this.info(choice ? "Mr Flintz n'est pas content: "+validation.errorMessage : "Mr Flintz n'est pas content: Les papiers de l'éléve étaient valides");
         }
     }
 
-    alert("GAME OVER: Flintz vous a viré !");
+    addPaper() {
+        this._subPepersUsed.push(this._subPepersUnused.shift());
+        alert("Les élèves doivent désormais présenter le document: "+ this._subPepersUsed[this._subPepersUsed.length-1]);
+    }
+
+    addRule() {
+        const rule = this._rulesGenerator.generateRule(this._subPepersUsed);
+        if(rule) {
+            this._rules.push(rule);
+            this._rulesViewer.clear();
+            this._rulesViewer.showRules(this._rules);
+            this.info("Nouvelle régle: "+ rule.text);
+        }
+    }
 }
 
-main();
+const game = new Game();
+game.start().catch(() => alert("fatal error :'("));

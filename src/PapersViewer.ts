@@ -20,13 +20,16 @@ export default class PapersViewer {
     }
 
     showPapers(papers: Papers) {
-        if(papers.paymentCertificate) this._showPaymentCertificate(papers.paymentCertificate);
-        if(papers.studentCard) this._showStudentCard(papers.studentCard);
-        if(papers.absencesRecords) this._showAbsencesRecords(papers.absencesRecords);
-        if(papers.ectsAccount) this._showECTSAccount(papers.ectsAccount);
-        if(papers.projectValidation) this._showProjectValidation(papers.projectValidation);
-        if(papers.tripValidation) this._showTripValidation(papers.tripValidation);
-        if(papers.prospectionValidation) this._showProspectionValidation(papers.prospectionValidation);
+        let html = "";
+        if(papers.paymentCertificate) html += this._showPaymentCertificate(papers.paymentCertificate);
+        if(papers.studentCard) html += this._showStudentCard(papers.studentCard);
+        if(papers.absencesRecords) html += this._showAbsencesRecords(papers.absencesRecords);
+        if(papers.ectsAccount) html += this._showECTSAccount(papers.ectsAccount);
+        if(papers.projectValidation) html += this._showProjectValidation(papers.projectValidation);
+        if(papers.tripValidation) html += this._showTripValidation(papers.tripValidation);
+        if(papers.prospectionValidation) html += this._showProspectionValidation(papers.prospectionValidation);
+
+        this.parent.innerHTML = html;
 
         Array.from(this.parent.children).forEach(function(item) {
             new Draggabilly(item);
@@ -34,7 +37,7 @@ export default class PapersViewer {
     }
 
     private _showPaymentCertificate(paymentCertificate: PaymentCertificate) {
-        this.parent.innerHTML += `
+        return `
 <div id="PaymentCertificate">
     <p class="name">${paymentCertificate.firstName} ${paymentCertificate.lastName}</p>
     <p class="birthDate">${this._printDate(paymentCertificate.birthDate)}</p>
@@ -46,7 +49,7 @@ export default class PapersViewer {
     }
 
     private _showStudentCard(studentCard: StudentCard) {
-        this.parent.innerHTML += `
+        return `
 <div id="StudentCard">
     <p class="name">${studentCard.firstName} ${studentCard.lastName}</p>
     <p class="birthDate">${this._printDate(studentCard.birthDate)}</p>
@@ -72,7 +75,7 @@ export default class PapersViewer {
     }
 
     private _showAbsencesRecords(absencesRecords: AbsencesRecords) {
-        this.parent.innerHTML += `
+        return `
 <div id="AbsencesRecords">
     <img id="AbsencesRecordsTop" src="assets/cards/absencehaut.png"/>
     <p class="name">${absencesRecords.firstName} ${absencesRecords.lastName}</p>
@@ -85,7 +88,7 @@ export default class PapersViewer {
     }
 
     private _showECTSAccount(ectsAccount: ECTSAccount) {
-        this.parent.innerHTML += `
+        return `
 <div id="ECTSAccount">
     <p class="name">${ectsAccount.firstName} ${ectsAccount.lastName}</p>
     <p class="birthDate">${this._printDate(ectsAccount.birthDate)}</p>
@@ -98,7 +101,7 @@ export default class PapersViewer {
     }
 
     private _showProjectValidation(projectValidation: ProjectValidation) {
-        this.parent.innerHTML += `
+        return `
 <div id="ProjectValidation">
     <p class="name">${projectValidation.firstName} ${projectValidation.lastName}</p>
     <p class="date">${this._printDate(projectValidation.date)}</p>
@@ -107,7 +110,7 @@ export default class PapersViewer {
     }
 
     private _showTripValidation(tripValidation: TripValidation) {
-        this.parent.innerHTML += `
+        return `
 <div id="TripValidation">
     <p class="name">${tripValidation.firstName} ${tripValidation.lastName}</p>
     <p class="startDate">${this._printDate(tripValidation.startDate)}</p>
@@ -117,7 +120,7 @@ export default class PapersViewer {
     }
 
     private _showProspectionValidation(prospectionValidation: ProspectionValidation) {
-        this.parent.innerHTML += `
+        return `
 <div id="ProspectionValidation">
     <p class="name">${prospectionValidation.firstName} ${prospectionValidation.lastName}</p>
     ${prospectionValidation.isSign? '<img class="sign" src="assets/cards/signature.png"/>': ''}
