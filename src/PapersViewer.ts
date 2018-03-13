@@ -132,6 +132,6 @@ export default class PapersViewer {
     }
 
     private _printDate(date: Date): string {
-        return `${date.getDate()} / ${date.getMonth()+1} / ${date.getFullYear()}`
+        return `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`
     }
 }

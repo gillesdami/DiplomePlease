@@ -40,12 +40,12 @@ export default class PapersGenerator {
         return {
             //generate all papers lited in subPapersRequired
             paymentCertificate: this._generatePaymentCertificat(),
-            studentCard: subPapersRequired.includes(Papers.OptionalPaper.StudentCard) && Math.random() < 0.99 ? this._generateStudentCard() : undefined,
-            absencesRecords: subPapersRequired.includes(Papers.OptionalPaper.AbsencesRecords) && Math.random() < 0.99 ? this._generateAbsencesRecords() : undefined,
-            projectValidation: subPapersRequired.includes(Papers.OptionalPaper.ProjectValidation) && Math.random() < 0.99 ? this._generateProjectValidation() : undefined,
-            tripValidation: subPapersRequired.includes(Papers.OptionalPaper.TripValidation) && Math.random() < 0.99 ? this._generateTripValidation() : undefined,
-            prospectionValidation: subPapersRequired.includes(Papers.OptionalPaper.ProspectionValidation) && Math.random() < 0.99 ? this._generateProspectionValidation() : undefined,
-            ectsAccount: subPapersRequired.includes(Papers.OptionalPaper.ECTSAccount) && Math.random() < 0.99 ? this._generateECTSAccount() : undefined,
+            studentCard: subPapersRequired.includes(Papers.OptionalPaper.StudentCard) && Math.random() < 0.95 ? this._generateStudentCard() : undefined,
+            absencesRecords: subPapersRequired.includes(Papers.OptionalPaper.AbsencesRecords) && Math.random() < 0.95 ? this._generateAbsencesRecords() : undefined,
+            projectValidation: subPapersRequired.includes(Papers.OptionalPaper.ProjectValidation) && Math.random() < 0.95 ? this._generateProjectValidation() : undefined,
+            tripValidation: subPapersRequired.includes(Papers.OptionalPaper.TripValidation) && Math.random() < 0.95 ? this._generateTripValidation() : undefined,
+            prospectionValidation: subPapersRequired.includes(Papers.OptionalPaper.ProspectionValidation) && Math.random() < 0.95 ? this._generateProspectionValidation() : undefined,
+            ectsAccount: subPapersRequired.includes(Papers.OptionalPaper.ECTSAccount) && Math.random() < 0.95 ? this._generateECTSAccount() : undefined,
         };
     }
 
@@ -156,7 +156,7 @@ export default class PapersGenerator {
      * @param attr 
      * @param treshold 
      */
-    private _getDataWithNoise(attr: string, treshold: number = 0.97): string {
+    private _getDataWithNoise(attr: string, treshold: number = 0.90): string {
         if(Math.random() < treshold) return this.getData(attr);
 
         let i:number;
