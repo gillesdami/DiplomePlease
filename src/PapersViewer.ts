@@ -54,7 +54,7 @@ export default class PapersViewer {
     <p class="name">${studentCard.firstName} ${studentCard.lastName}</p>
     <p class="birthDate">${this._printDate(studentCard.birthDate)}</p>
     <p class="sex">${studentCard.sex}</p>
-    <div class="photo"><img src="${studentCard.photo ? studentCard.photo : "assets/cards/face.png"}"/></div>
+    <div class="photo"><img src="${studentCard.photo ? "assets/faces/"+studentCard.photo : "assets/cards/face.png"}"/></div>
 </div>`;
     }
 
@@ -132,6 +132,6 @@ export default class PapersViewer {
     }
 
     private _printDate(date: Date): string {
-        return `${date.getDate()} / ${date.getMonth()+1} / ${date.getFullYear()-2000}`
+        return `${date.getDate()} / ${date.getMonth()+1} / ${date.getFullYear()}`
     }
 }

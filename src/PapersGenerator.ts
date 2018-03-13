@@ -3,7 +3,7 @@ import * as csv from 'papaparse';
 import * as Papers from './PapersModel';
 
 export default class PapersGenerator {
-    private _csvIndex: number = 0;
+    private _csvIndex: number = this._getRandomInt(0,1000);
     private rawData: any;
 
     async loadCsv(csvFile: string) {
@@ -53,7 +53,7 @@ export default class PapersGenerator {
         return {
             firstName: this._getDataWithNoise("firstName"),
             lastName: this._getDataWithNoise("lastName"),
-            birthDate: new Date(this._getDataWithNoise("birthDate")),
+            birthDate: new Date(this._getDataWithNoise("birthDate").replace( /(\d{2})\/(\d{2})\/(\d{4})/, "$2/$1/$3")),
             sex: this._getDataWithNoise("sex") === "M" ? Papers.Sex.M : Papers.Sex.F,
             method: this._getRandomFromEnum(Papers.PaymentMethod),
             date: this._randomDate(new Date("september 9 2017"), new Date()),
@@ -65,7 +65,7 @@ export default class PapersGenerator {
         return {
             firstName: this.getData("firstName"),
             lastName: this.getData("lastName"),
-            birthDate: new Date(this.getData("birthDate")),
+            birthDate: new Date(this.getData("birthDate").replace( /(\d{2})\/(\d{2})\/(\d{4})/, "$2/$1/$3")),
             sex: this.getData("sex") === "M" ? Papers.Sex.M : Papers.Sex.F,
             photo: this.getData("photo"),
         }
@@ -100,10 +100,10 @@ export default class PapersGenerator {
         return {
             firstName: this._getDataWithNoise("firstName"),
             lastName: this._getDataWithNoise("lastName"),
-            startDate: new Date(this.getData("startDate")),
+            startDate: new Date(this.getData("startDate").replace( /(\d{2})\/(\d{2})\/(\d{4})/, "$2/$1/$3")),
             remoteDest: this.getData("remoteDest"),
             isValidDest: this.getData("isValidDest") === "1",
-            endDate: new Date(this.getData("endDate")),
+            endDate: new Date(this.getData("endDate").replace( /(\d{2})\/(\d{2})\/(\d{4})/, "$2/$1/$3")),
         }
     }
     
@@ -119,7 +119,7 @@ export default class PapersGenerator {
         return {
             firstName: this._getDataWithNoise("firstName"),
             lastName: this._getDataWithNoise("lastName"),
-            birthDate: new Date(this._getDataWithNoise("birthDate")),
+            birthDate: new Date(this._getDataWithNoise("birthDate").replace( /(\d{2})\/(\d{2})\/(\d{4})/, "$2/$1/$3")),
             sieste: Number(this.getData("sieste")),
             soiree: Number(this.getData("soiree")),
             procrastination: Number(this.getData("procrastination")),
